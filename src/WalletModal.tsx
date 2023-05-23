@@ -2,61 +2,56 @@ import { useEffect, useState } from "react";
 import Modal from "./components/Modal";
 import Web3 from "web3";
 
-interface ModalProps {}
+interface Wallet {
+  address: string;
+  balance: number;
+}
 
-function WalletModal({}: ModalProps) {
-  const [wallet, setWallet] = useState<any>(null);
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
 
-  const connect = () => {
-    // Check if MetaMask is installed and enabled
-    if (typeof window.ethereum !== "undefined") {
-      // Request access to the user's Ethereum accounts
-      const requestAccounts = async () => {
-        try {
-          // Request access to the user's accounts
-          const accounts = await window.ethereum.request({
-            method: "eth_requestAccounts",
-          });
+function WalletModal() {
+  const [wallet, setWallet] = useState<Wallet | null>(null);
 
-          // Get the selected account
-          const selectedAccount = accounts[0];
-          // const chainId = await window.ethereum.request({
-          //   method: "eth_chainId",
-          // });
-          // const polygonChainId = "0x89"; // Polygon Mainnet Chain ID
-          // if (chainId !== polygonChainId) {
-          //   console.error("Please connect to the Polygon network.");
-          //   return;
-          // }
+  const connect = async () => {
+    try {
+      // Check if MetaMask is installed and enabled
+      if (typeof window.ethereum !== "undefined") {
+        // Request access to the user's Ethereum accounts
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
 
-          const balance = await window.ethereum.request({
-            method: "eth_getBalance",
-            params: [selectedAccount, "latest"],
-          });
-          const web3 = new Web3(window.ethereum);
-          const etherBalance = parseFloat(web3.utils.fromWei(balance, "ether"));
+        // Get the selected account
+        const selectedAccount = accounts[0];
 
-          // format wallet address
-          const formattedWallet = `${selectedAccount.slice(
-            0,
-            6
-          )}...${selectedAccount.slice(-4)}`;
-          setWallet({ address: formattedWallet, balance: etherBalance });
+        const balance = await window.ethereum.request({
+          method: "eth_getBalance",
+          params: [selectedAccount, "latest"],
+        });
+        const web3 = new Web3(window.ethereum);
+        const etherBalance = parseFloat(web3.utils.fromWei(balance, "ether"));
 
-          // Listen for changes in the selected account
-          window.ethereum.on("accountsChanged", (newAccounts: any) => {
-            const newSelectedAccount = newAccounts[0];
-            console.log("Selected account changed:", newSelectedAccount);
-          });
-        } catch (error) {
-          console.error("Error requesting accounts:", error);
-        }
-      };
+        // Format wallet address
+        const formattedWallet = `${selectedAccount.slice(
+          0,
+          6
+        )}...${selectedAccount.slice(-4)}`;
+        setWallet({ address: formattedWallet, balance: etherBalance });
 
-      // Call the function to request accounts
-      requestAccounts();
-    } else {
-      console.error("MetaMask is not installed.");
+        // Listen for changes in the selected account
+        window.ethereum.on("accountsChanged", (newAccounts: string[]) => {
+          const newSelectedAccount = newAccounts[0];
+          console.log("Selected account changed:", newSelectedAccount);
+        });
+      } else {
+        console.error("MetaMask is not installed.");
+      }
+    } catch (error) {
+      console.error("Error requesting accounts:", error);
     }
   };
 
@@ -70,7 +65,7 @@ function WalletModal({}: ModalProps) {
           <p>{wallet.balance} ETH</p>
         </div>
       ) : (
-        <button onClick={connect}>connect</button>
+        <button onClick={connect}>Connect</button>
       )}
     </Modal>
   );
