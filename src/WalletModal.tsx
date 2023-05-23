@@ -57,16 +57,26 @@ function WalletModal() {
 
   return (
     <Modal>
-      <h1>Connect Your Wallet</h1>
-      {wallet ? (
-        <div>
-          <p>Wallet Connected</p>
-          <p>{wallet.address}</p>
-          <p>{wallet.balance} ETH</p>
-        </div>
-      ) : (
-        <button onClick={connect}>Connect</button>
-      )}
+      <h1 className="text-center"> Your Wallet</h1>
+      <div className="flex justify-center items-center">
+        {wallet ? (
+          <div>
+            <p className="text-slate-500">Address: </p>
+            <p className="text-lg"> {wallet.address}</p>
+            <p className="text-slate-500">Balance</p>
+            <p className="text-lg">{wallet.balance} ETH</p>
+          </div>
+        ) : (
+          <div>
+            <button
+              className="bg-slate-300 p-2 rounded-lg pointer"
+              onClick={connect}
+            >
+              Connect
+            </button>
+          </div>
+        )}
+      </div>
     </Modal>
   );
 }
