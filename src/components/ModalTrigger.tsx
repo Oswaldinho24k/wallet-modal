@@ -11,7 +11,7 @@ function ModalTrigger({ modal, buttonText = "Open" }: ModalProps) {
     <>
       <div className="p-10">
         <button
-          className="bg-white p-2 rounded-lg pointer"
+          className="bg-white p-2 rounded-lg pointer text-2xl"
           onClick={handleOpen}
         >
           {buttonText}

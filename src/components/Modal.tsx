@@ -16,13 +16,10 @@ function Modal({ children }: ModalProps) {
           isOpen ? "translate-y-0" : "translate-y-full "
         }`}
       >
-        <div className="w-full sm:w-1/2 min-h-min h-1/2 bg-white rounded-lg p-5 sm:p-10">
-          <div className="absolute top-0 right-0 p-5 sm:p-10">
-            <button
-              className="bg-white p-2 rounded-lg pointer w-10 h-10"
-              onClick={handleOpen}
-            >
-              X
+        <div className="w-full sm:w-1/2 min-h-min h-1/2 bg-white rounded-lg p-5 sm:p-10 relative">
+          <div className="absolute top-2 right-2">
+            <button className="pointer p-2" onClick={handleOpen}>
+              <i className="ri-close-line ri-xl"></i>
             </button>
           </div>
           {children}

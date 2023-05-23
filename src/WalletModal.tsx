@@ -57,8 +57,11 @@ function WalletModal() {
 
   return (
     <Modal>
-      <h1 className="text-center"> Your Wallet</h1>
-      <div className="flex justify-center items-center">
+      <h1 className="text-center">
+        {" "}
+        Your Wallet <i className="ri-wallet-line ri-xl"></i>
+      </h1>
+      <div className="flex justify-center items-center h-full">
         {wallet ? (
           <div>
             <p className="text-slate-500">Address: </p>
