@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "./components/Modal";
 import Web3 from "web3";
 
@@ -56,7 +56,7 @@ function WalletModal() {
   };
 
   return (
-    <Modal>
+    <Modal id="wallet-modal">
       <h1 className="text-center">
         {" "}
         Your Wallet <i className="ri-wallet-line ri-xl"></i>

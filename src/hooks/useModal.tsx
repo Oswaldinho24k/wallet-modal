@@ -1,16 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 function useModalState(): {
-  isOpen: boolean;
-  handleOpen: () => void;
+  modals: { [key: string]: boolean };
+  handleOpen: (id: string) => void;
 } {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [modals, setIsOpen] = useState<{ [key: string]: boolean }>({});
 
-  const handleOpen = () => {
-    setIsOpen((prev: boolean) => !prev);
+  const handleOpen = (id: string) => {
+    setIsOpen((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  return { isOpen, handleOpen };
+  return { modals, handleOpen };
 }
 
 const ModalContext = createContext<ReturnType<typeof useModalState>>(
