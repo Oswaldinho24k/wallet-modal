@@ -25,3 +25,7 @@ To run the app locally, follow these steps:
    ```
 
 6. Open the Wallet Modal, click connect and connect to your metamask wallet for it to get your address and balance
+
+## Deployed Version
+
+App is already deployed [Here](https://oswaldinho24k.github.io/wallet-modal/)
