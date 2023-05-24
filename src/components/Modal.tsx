@@ -11,19 +11,8 @@ function Modal({ children, id }: ModalProps) {
   const { modals, handleOpen } = useModal();
   const modalRef = useRef<HTMLDivElement>(null);
   const isOpen = modals && modals[id];
-  const modalContainer = document.getElementById("modal-root")!;
 
-  useEffect(() => {
-    if (isOpen) {
-      modalContainer?.appendChild(modalRef.current!);
-
-      return () => {
-        modalContainer?.removeChild(modalRef.current!);
-      };
-    }
-  }, [isOpen]);
-
-  return ReactDOM.createPortal(
+  return (
     <div
       ref={modalRef}
       className={`w-full h-screen flex justify-center items-center fixed top-0 left-0 backdrop-blur-sm bg-white/30 p-5 sm:p-10 transition duration-500 ${
@@ -38,8 +27,7 @@ function Modal({ children, id }: ModalProps) {
         </div>
         {children}
       </div>
-    </div>,
-    modalContainer
+    </div>
   );
 }
 

@@ -2,26 +2,24 @@ import { useState } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
 import ModalTrigger from "./components/ModalTrigger";
-import WalletModal from "./WalletModal";
+import WalletModal from "./components/WalletModal";
 
 function App() {
   return (
-    <div
-      className="h-screen w-full bg-norepeat bg-cover bg-center flex items-center justify-center flex-col sm:flex-row"
-      style={{
-        backgroundImage: `url("https://images.pexels.com/photos/730564/pexels-photo-730564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
-      }}
-    >
-      <ModalTrigger
-        id="wallet-modal"
-        buttonText="Open Modal"
-        modal={<WalletModal />}
-      />
-      <ModalTrigger
-        id="another-one"
-        buttonText="Another one"
-        modal={<Modal id="another-one">Another One</Modal>}
-      />
+    <div className="h-screen w-full bg-norepeat bg-cover bg-center bg-slate-900 p-10">
+      <h1 className="text-3xl text-center text-white">0x Wallet Modal</h1>
+      <div className="w-full h-full flex items-center justify-center flex-col sm:flex-row">
+        <ModalTrigger
+          id="wallet-modal"
+          buttonText="Open Wallet Modal"
+          modal={<WalletModal />}
+        />
+        <ModalTrigger
+          id="another-one"
+          buttonText="Another one"
+          modal={<Modal id="another-one">Another One</Modal>}
+        />
+      </div>
     </div>
   );
 }

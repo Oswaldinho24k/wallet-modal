@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "./components/Modal";
+import Modal from "./Modal";
 import Web3 from "web3";
 
 interface Wallet {
