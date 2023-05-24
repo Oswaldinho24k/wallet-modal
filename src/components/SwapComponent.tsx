@@ -13,7 +13,7 @@ function SwapComponent({ balance }: SwapProps) {
   return (
     <div className="w-full bg-slate-900 text-white rounded-lg p-5 relative">
       <p className="mb-2">Swap</p>
-      <button className="absolute top-[calc(50%-30px)] right-[calc(50%-10px)] bg-slate-900 p-1 rounded-lg pointer h-10 w-10">
+      <button className="absolute top-[calc(50%-20px)] right-[calc(50%-15px)] sm:top-[calc(50%-30px)] sm:right-[calc(50%-10px)] bg-slate-900 p-1 rounded-lg pointer h-10 w-10">
         <i className="ri-arrow-down-line ri-lg"></i>
       </button>
       <div className="flex justify-between gap-5 sm:gap-10 rounded-lg bg-slate-500 mb-2 p-5">
