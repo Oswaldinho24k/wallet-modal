@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import Web3 from "web3";
+import SwapComponent from "./SwapComponent";
 
 interface Wallet {
   address: string;
-  balance: number;
+  balance: string;
 }
 
 declare global {
@@ -18,9 +19,7 @@ function WalletModal() {
 
   const connect = async () => {
     try {
-      // Check if MetaMask is installed and enabled
       if (typeof window.ethereum !== "undefined") {
-        // Request access to the user's Ethereum accounts
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
@@ -33,7 +32,9 @@ function WalletModal() {
           params: [selectedAccount, "latest"],
         });
         const web3 = new Web3(window.ethereum);
-        const etherBalance = parseFloat(web3.utils.fromWei(balance, "ether"));
+        const etherBalance = parseFloat(
+          web3.utils.fromWei(balance, "ether")
+        ).toFixed(4);
 
         // Format wallet address
         const formattedWallet = `${selectedAccount.slice(
@@ -66,8 +67,9 @@ function WalletModal() {
           <div>
             <p className="text-slate-500">Address: </p>
             <p className="text-lg"> {wallet.address}</p>
-            <p className="text-slate-500">Balance</p>
-            <p className="text-lg">{wallet.balance} ETH</p>
+            {/* <p className="text-slate-500">Balance</p>x
+            <p className="text-lg">{wallet.balance} ETH</p> */}
+            <SwapComponent balance={wallet.balance} />
           </div>
         ) : (
           <div>

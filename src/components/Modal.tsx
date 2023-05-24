@@ -19,7 +19,7 @@ function Modal({ children, id }: ModalProps) {
         isOpen ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <div className="w-full sm:w-1/2 min-h-min h-1/2 bg-white rounded-lg p-5 sm:p-10 relative">
+      <div className="w-full sm:w-1/2 min-h-min bg-white rounded-lg p-5 sm:p-10 relative">
         <div className="absolute top-2 right-2">
           <button className="pointer p-2" onClick={() => handleOpen(id)}>
             <i className="ri-close-line ri-xl"></i>
